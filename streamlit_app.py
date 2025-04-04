@@ -1,4 +1,6 @@
 import streamlit as st
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 st.title("Employee Attrition Predictor")
 st.subheader("Make smarter HR decisions")
