@@ -20,6 +20,17 @@ def load_data():
 
 df = load_data()
 
+
+# Load model and features
+@st.cache_resource
+def load_model():
+    model, features = joblib.load("voting_model.pkl")
+    return model, features
+
+
+model, feature_names = load_model()
+
+# Split tabs
 tab1, tab2 = st.tabs(["🏠 Key Attrition Drivers", "🔮 Predict Attrition"])
 
 with tab1:
@@ -50,48 +61,42 @@ with tab2:
         "This app predicts whether an employee is at risk of leaving based on their profile."
     )
 
-    # @st.cache_resource
-    # def load_model():
-    #     with open("model/ensemble_model.pkl", "rb") as f:
-    #         model, features = cloudpickle.load(f)
-    #     return model, features
-
-    @st.cache_resource
-    def load_model():
-        model, features = joblib.load("model/ensemble_model.pkl")
-        return model, features
-
-    model, feature_names = load_model()
-
     st.sidebar.title("Employee Details")
 
-    job_level = st.sidebar.slider("Job Level", 1, 5, 2)
-    overtime = st.sidebar.selectbox("OverTime", ["Yes", "No"])
-    env_satisfaction = st.sidebar.slider("Environment Satisfaction", 1, 4, 3)
-    job_involvement = st.sidebar.slider("Job Involvement", 1, 4, 3)
-    years_in_role = st.sidebar.slider("Years in Current Role", 0, 15, 3)
+    # Input capture matching trained features
+    BusinessTravel_Non_Travel = (
+        st.sidebar.selectbox("Business Travel (Is Non-Travel?)", ["Yes", "No"]) == "Yes"
+    )
+    Department_Research_Development = (
+        st.sidebar.selectbox("Department: Research & Dev?", ["Yes", "No"]) == "Yes"
+    )
+    JobRole_SalesExecutive = (
+        st.sidebar.selectbox("Job Role: Sales Executive?", ["Yes", "No"]) == "Yes"
+    )
+    MaritalStatus_Single = st.sidebar.selectbox("Is Single?", ["Yes", "No"]) == "Yes"
+
     age = st.sidebar.slider("Age", 18, 60, 35)
-    job_satisfaction = st.sidebar.slider("Job Satisfaction", 1, 4, 3)
+    distance_from_home = st.sidebar.slider("Distance From Home", 1, 30, 10)
     monthly_income = st.sidebar.number_input("Monthly Income", 1000, 20000, 6000)
+    num_companies_worked = st.sidebar.slider("Number of Companies Worked", 0, 10, 2)
+    percent_salary_hike = st.sidebar.slider("% Salary Hike", 10, 30, 15)
     total_working_years = st.sidebar.slider("Total Working Years", 0, 40, 10)
 
-    overtime_binary = 1 if overtime == "Yes" else 0
-    input_data = pd.DataFrame(
-        [
-            [
-                job_level,
-                overtime_binary,
-                env_satisfaction,
-                job_involvement,
-                years_in_role,
-                age,
-                job_satisfaction,
-                monthly_income,
-                total_working_years,
-            ]
-        ],
-        columns=feature_names,
-    )
+    # Assemble input vector
+    input_dict = {
+        "Age": age,
+        "DistanceFromHome": distance_from_home,
+        "MonthlyIncome": monthly_income,
+        "NumCompaniesWorked": num_companies_worked,
+        "PercentSalaryHike": percent_salary_hike,
+        "TotalWorkingYears": total_working_years,
+        "BusinessTravel_Non-Travel": int(BusinessTravel_Non_Travel),
+        "Department_Research & Development": int(Department_Research_Development),
+        "JobRole_Sales Executive": int(JobRole_SalesExecutive),
+        "MaritalStatus_Single": int(MaritalStatus_Single),
+    }
+
+    input_data = pd.DataFrame([input_dict])[feature_names]
 
     if st.button("Predict Attrition Risk"):
         prediction = model.predict(input_data)[0]
