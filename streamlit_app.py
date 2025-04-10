@@ -50,6 +50,12 @@ with tab2:
         "This app predicts whether an employee is at risk of leaving based on their profile."
     )
 
+    # @st.cache_resource
+    # def load_model():
+    #     with open("model/ensemble_model.pkl", "rb") as f:
+    #         model, features = cloudpickle.load(f)
+    #     return model, features
+
     @st.cache_resource
     def load_model():
         model, features = joblib.load("model/ensemble_model.pkl")

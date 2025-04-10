@@ -1,33 +1,7 @@
-annotated-types==0.7.0 ; python_version >= "3.11" and python_version < "4.0"
-anyio==4.9.0 ; python_version >= "3.11" and python_version < "4.0"
-click==8.1.8 ; python_version >= "3.11" and python_version < "4.0"
-colorama==0.4.6 ; python_version >= "3.11" and python_version < "4.0" and platform_system == "Windows"
-contourpy==1.3.1 ; python_version >= "3.11" and python_version < "4.0"
-cycler==0.12.1 ; python_version >= "3.11" and python_version < "4.0"
-fastapi==0.115.12 ; python_version >= "3.11" and python_version < "4.0"
-fonttools==4.57.0 ; python_version >= "3.11" and python_version < "4.0"
-h11==0.14.0 ; python_version >= "3.11" and python_version < "4.0"
-idna==3.10 ; python_version >= "3.11" and python_version < "4.0"
-joblib==1.4.2 ; python_version >= "3.11" and python_version < "4.0"
-kiwisolver==1.4.8 ; python_version >= "3.11" and python_version < "4.0"
-matplotlib==3.10.1 ; python_version >= "3.11" and python_version < "4.0"
-numpy==2.2.4 ; python_version >= "3.11" and python_version < "4.0"
-packaging==24.2 ; python_version >= "3.11" and python_version < "4.0"
-pandas==2.2.3 ; python_version >= "3.11" and python_version < "4.0"
-pillow==11.1.0 ; python_version >= "3.11" and python_version < "4.0"
-pydantic-core==2.33.1 ; python_version >= "3.11" and python_version < "4.0"
-pydantic==2.11.2 ; python_version >= "3.11" and python_version < "4.0"
-pyparsing==3.2.3 ; python_version >= "3.11" and python_version < "4.0"
-python-dateutil==2.9.0.post0 ; python_version >= "3.11" and python_version < "4.0"
-pytz==2025.2 ; python_version >= "3.11" and python_version < "4.0"
-scikit-learn==1.6.1 ; python_version >= "3.11" and python_version < "4.0"
-scipy==1.15.2 ; python_version >= "3.11" and python_version < "4.0"
-seaborn==0.13.2 ; python_version >= "3.11" and python_version < "4.0"
-six==1.17.0 ; python_version >= "3.11" and python_version < "4.0"
-sniffio==1.3.1 ; python_version >= "3.11" and python_version < "4.0"
-starlette==0.46.1 ; python_version >= "3.11" and python_version < "4.0"
-threadpoolctl==3.6.0 ; python_version >= "3.11" and python_version < "4.0"
-typing-extensions==4.13.1 ; python_version >= "3.11" and python_version < "4.0"
-typing-inspection==0.4.0 ; python_version >= "3.11" and python_version < "4.0"
-tzdata==2025.2 ; python_version >= "3.11" and python_version < "4.0"
-uvicorn==0.34.0 ; python_version >= "3.11" and python_version < "4.0"
+streamlit
+pandas
+matplotlib
+seaborn
+scikit-learn
+joblib
+xgboost
